@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA DOES HAIR - Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <h1 class="logo">SHA DOES HAIR</h1>
+            <div class="color-spots">
+                <div class="spot pink"></div>
+                <div class="spot purple"></div>
+                <div class="spot black"></div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-section="gallery">Gallery</a></li>
+                <li><a href="#" class="nav-link" data-section="booking">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="owner-profile">
+                    <img src="IMG-20250413-WA0039.jpg" alt="Owner" class="owner-image">
+                    <div class="owner-info">
+                        <h2>Meet Sacha</h2>
+                        <p>Professional hairstylist specializing in custom hair solutions</p>
+                    </div>
+                </div>
+                <div class="hero-text">
+                    <h2>Transform Your Look</h2>
+                    <p>Book your perfect hairstyle today</p>
+                    <button class="cta-button" data-section="booking">Book Now</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <h2 class="section-title">Our Work</h2>
+            <div class="gallery-container">
+                <div class="media-container">
+                    <h3>Photos</h3>
+                    <div class="photos-grid">
+                        <!-- Placeholder for 6 photos -->
+                        <div class="photo-item"><img src="IMG-20250603-WA0023.jpg" alt="Hairstyle 1"></div>
+                        <div class="photo-item"><img src="IMG-20250603-WA0025.jpg" alt="Hairstyle 2"></div>
+                        <div class="photo-item"><img src="IMG-20250603-WA0026.jpg" alt="Hairstyle 3"></div>
+                        <div class="photo-item"><img src="IMG-20250603-WA0027.jpg" alt="Hairstyle 4"></div>
+                        <div class="photo-item"><img src="IMG-20250603-WA0031.jpg" alt="Hairstyle 5"></div>
+                        <div class="photo-item"><img src="IMG-20250603-WA0022.jpg" alt="Hairstyle 6"></div>
+                    </div>
+                </div>
+                <div class="media-container">
+                    <h3>Videos</h3>
+                    <div class="videos-grid">
+                        <!-- Placeholder for 6 videos -->
+                        <div class="video-item">
+                            <video controls autoplay loop muted>
+                                <source src="VID-20250603-WA0016.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-item">
+                            <video controls autoplay loop muted>
+                                <source src="VID-20250603-WA0017.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-item">
+                            <video controls autoplay loop muted>
+                                <source src="VID-20250603-WA0030.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-item">
+                            <video controls autoplay loop muted>
+                                <source src="VID-20250603-WA0012.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-item">
+                            <video controls autoplay loop muted>
+                                <source src="VID-20250603-WA0038.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-item">
+                            <video controls autoplay loop muted>
+                                <source src="VID-20250603-WA0028.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="section">
+            <div class="booking-container">
+                <h2 class="section-title">Book Your Appointment</h2>
+                <div class="booking-steps">
+                    <div class="step-indicator">
+                        <div class="step active" data-step="1">Block Size</div>
+                        <div class="step" data-step="2">Length</div>
+                        <div class="step" data-step="3">Style</div>
+                        <div class="step" data-step="4">Color</div>
+                        <div class="step" data-step="5">Hair Length</div>
+                        <div class="step" data-step="6">Curls</div>
+                        <div class="step" data-step="7">Curl Method</div>
+                        <div class="step" data-step="8">Client Status</div>
+                        <div class="step" data-step="9">Details</div>
+                    </div>
+
+                    <form id="booking-form" class="booking-form">
+                        <!-- Step 1: Block Size -->
+                        <div class="form-step active" data-step="1">
+                            <h3>Select Block Size</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="blockSize" value="Extra Small R100" data-price="100">
+                                    <div class="option-content">
+                                        <span>Extra Small</span>
+                                        <span>R100</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="blockSize" value="Small R90" data-price="90">
+                                    <div class="option-content">
+                                        <span>Small</span>
+                                        <span>R90</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="blockSize" value="Smedium R80" data-price="80">
+                                    <div class="option-content">
+                                        <span>Smedium</span>
+                                        <span>R80</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="blockSize" value="Medium R70" data-price="70">
+                                    <div class="option-content">
+                                        <span>Medium</span>
+                                        <span>R70</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="blockSize" value="Large R60" data-price="60">
+                                    <div class="option-content">
+                                        <span>Large</span>
+                                        <span>R60</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="blockSize" value="Jumbo R50" data-price="50">
+                                    <div class="option-content">
+                                        <span>Jumbo</span>
+                                        <span>R50</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Length -->
+                        <div class="form-step" data-step="2">
+                            <h3>Select Length</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="length" value="Shoulder R0" data-price="0">
+                                    <div class="option-content">
+                                        <span>Shoulder</span>
+                                        <span>R0</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="length" value="Mid Back +R50" data-price="50">
+                                    <div class="option-content">
+                                        <span>Mid Back</span>
+                                        <span>+R50</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="length" value="Waist Length +R100" data-price="100">
+                                    <div class="option-content">
+                                        <span>Waist Length</span>
+                                        <span>+R100</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="length" value="Bum Length +R150" data-price="150">
+                                    <div class="option-content">
+                                        <span>Bum Length</span>
+                                        <span>+R150</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="length" value="Knee Length +R200" data-price="200">
+                                    <div class="option-content">
+                                        <span>Knee Length</span>
+                                        <span>+R200</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Style -->
+                        <div class="form-step" data-step="3">
+                            <h3>Select Style</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="style" value="None R0" data-price="0">
+                                    <div class="option-content">
+                                        <span>None</span>
+                                        <span>R0</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="style" value="Knotless +R50" data-price="50">
+                                    <div class="option-content">
+                                        <span>Knotless</span>
+                                        <span>+R50</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="style" value="Twist +R30" data-price="30">
+                                    <div class="option-content">
+                                        <span>Twist</span>
+                                        <span>+R30</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="style" value="Locs +R100" data-price="100">
+                                    <div class="option-content">
+                                        <span>Locs</span>
+                                        <span>+R100</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="style" value="French Curls +R70" data-price="70">
+                                    <div class="option-content">
+                                        <span>French Curls</span>
+                                        <span>+R70</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="style" value="Brazilian Twist +R60" data-price="60">
+                                    <div class="option-content">
+                                        <span>Brazilian Twist</span>
+                                        <span>+R60</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Color -->
+                        <div class="form-step" data-step="4">
+                            <h3>Select Color</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="color" value="1 Color R0" data-price="0">
+                                    <div class="option-content">
+                                        <span>1 Color</span>
+                                        <span>R0</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="color" value="Color Mix +R30" data-price="30">
+                                    <div class="option-content">
+                                        <span>Color Mix</span>
+                                        <span>+R30</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Hair Length -->
+                        <div class="form-step" data-step="5">
+                            <h3>Select Hair Length</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="hairLength" value="Short +R50" data-price="50">
+                                    <div class="option-content">
+                                        <span>Short</span>
+                                        <span>+R50</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="hairLength" value="Normal R0" data-price="0">
+                                    <div class="option-content">
+                                        <span>Normal</span>
+                                        <span>R0</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Curls -->
+                        <div class="form-step" data-step="6">
+                            <h3>Select Curls</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="curls" value="None R0" data-price="0">
+                                    <div class="option-content">
+                                        <span>None</span>
+                                        <span>R0</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="curls" value="Bottom Curls Only +R20" data-price="20">
+                                    <div class="option-content">
+                                        <span>Bottom Curls Only</span>
+                                        <span>+R20</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="curls" value="Boho/Goddess Curls Only +R40" data-price="40">
+                                    <div class="option-content">
+                                        <span>Boho/Goddess Curls Only</span>
+                                        <span>+R40</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="curls" value="Both Bottom + Boho +R60" data-price="60">
+                                    <div class="option-content">
+                                        <span>Both Bottom + Boho</span>
+                                        <span>+R60</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 7: Curl Method -->
+                        <div class="form-step" data-step="7">
+                            <h3>Select Curl Method</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="curlMethod" value="Client Brings Curls R0" data-price="0">
+                                    <div class="option-content">
+                                        <span>Client Brings Curls</span>
+                                        <span>R0</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="curlMethod" value="I Curl the Hairpiece +R10" data-price="10">
+                                    <div class="option-content">
+                                        <span>I Curl the Hairpiece</span>
+                                        <span>+R10</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="curlMethod" value="I Use My Own Curls +R30" data-price="30">
+                                    <div class="option-content">
+                                        <span>I Use My Own Curls</span>
+                                        <span>+R30</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 8: Client Status -->
+                        <div class="form-step" data-step="8">
+                            <h3>Select Client Status</h3>
+                            <div class="options-grid">
+                                <label class="option-card">
+                                    <input type="radio" name="clientStatus" value="First Time" data-discount="0">
+                                    <div class="option-content">
+                                        <span>First Time</span>
+                                        <span>No Discount</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="clientStatus" value="Returning 10% off" data-discount="10">
+                                    <div class="option-content">
+                                        <span>Returning</span>
+                                        <span>10% off</span>
+                                    </div>
+                                </label>
+                                <label class="option-card">
+                                    <input type="radio" name="clientStatus" value="5+ Styles Done 20% off" data-discount="20">
+                                    <div class="option-content">
+                                        <span>5+ Styles Done</span>
+                                        <span>20% off</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="button" class="next-step">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 9: Personal Details -->
+                        <div class="form-step" data-step="9">
+                            <h3>Your Details</h3>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Preferred Date</label>
+                                <input type="text" id="date" name="date" class="datepicker" placeholder="Select date" required>
+                            </div>
+                            
+                            <div class="summary">
+                                <h4>Order Summary</h4>
+                                <div id="order-summary"></div>
+                                <div class="total">
+                                    <strong>Total: R<span id="total-price">0</span></strong>
+                                    <span id="discount-text"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="step-navigation">
+                                <button type="button" class="prev-step">Previous</button>
+                                <button type="submit" class="submit-btn">Book Appointment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contact-info">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> sachah456@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +27 63 010 4524</p>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <div class="floating-spots">
+        <div class="spot pink"></div>
+        <div class="spot purple"></div>
+        <div class="spot black"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
+</body>
+</html>
