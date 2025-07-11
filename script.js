@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Encode for WhatsApp URL
             const encodedMessage = encodeURIComponent(whatsappMessage);
-            const whatsappUrl = `https://wa.me/27630104524?text=${encodedMessage}`;
+            const whatsappUrl = `https://wa.me/27818744472?text=${encodedMessage}`;
             
             // Open WhatsApp in new tab
             window.open(whatsappUrl, '_blank');
