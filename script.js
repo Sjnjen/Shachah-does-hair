@@ -128,13 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Extract price from option value
-        function getPriceFromOption(optionValue) {
-            // Match both "Rxxx" and "+Rxxx" patterns
-            const priceMatch = optionValue.match(/(?:\+)?R(\d+)/);
-            return priceMatch ? parseInt(priceMatch[1]) : 0;
-        }
-        
         // Update order summary
         function updateOrderSummary() {
             const summaryElement = document.getElementById('order-summary');
@@ -155,14 +148,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (name !== 'name' && name !== 'email' && name !== 'phone' && name !== 'date') {
                     selectedOptions[name] = value;
                     
-                    // Get price from option value
-                    totalPrice += getPriceFromOption(value);
+                    // Get price from data-price attribute instead of parsing from value
+                    const selectedInput = bookingForm.querySelector(`input[name="${name}"][value="${value}"]`);
+                    if (selectedInput) {
+                        const price = parseFloat(selectedInput.getAttribute('data-price')) || 0;
+                        totalPrice += price;
+                    }
                     
                     // Check for discount in client status
                     if (name === 'clientStatus') {
-                        const discountMatch = value.match(/(\d+)% off/);
-                        if (discountMatch) {
-                            discount = parseInt(discountMatch[1]);
+                        const selectedInput = bookingForm.querySelector(`input[name="${name}"][value="${value}"]`);
+                        if (selectedInput) {
+                            discount = parseFloat(selectedInput.getAttribute('data-discount')) || 0;
                         }
                     }
                 }
@@ -222,14 +219,18 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let [name, value] of formData.entries()) {
                 selectedOptions[name] = value;
                 
-                // Calculate total price
-                totalPrice += getPriceFromOption(value);
+                // Get price from data-price attribute
+                const selectedInput = bookingForm.querySelector(`input[name="${name}"][value="${value}"]`);
+                if (selectedInput) {
+                    const price = parseFloat(selectedInput.getAttribute('data-price')) || 0;
+                    totalPrice += price;
+                }
                 
                 // Check for discount
                 if (name === 'clientStatus') {
-                    const discountMatch = value.match(/(\d+)% off/);
-                    if (discountMatch) {
-                        discount = parseInt(discountMatch[1]);
+                    const selectedInput = bookingForm.querySelector(`input[name="${name}"][value="${value}"]`);
+                    if (selectedInput) {
+                        discount = parseFloat(selectedInput.getAttribute('data-discount')) || 0;
                     }
                 }
             }
