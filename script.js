@@ -128,7 +128,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Update order summary with correct prices
+        // Extract price from option value
+        function getPriceFromOption(optionValue) {
+            // Match both "Rxxx" and "+Rxxx" patterns
+            const priceMatch = optionValue.match(/(?:\+)?R(\d+)/);
+            return priceMatch ? parseInt(priceMatch[1]) : 0;
+        }
+        
+        // Update order summary
         function updateOrderSummary() {
             const summaryElement = document.getElementById('order-summary');
             const totalPriceElement = document.getElementById('total-price');
@@ -140,77 +147,29 @@ document.addEventListener('DOMContentLoaded', function() {
             let totalPrice = 0;
             let discount = 0;
             
-            // Price mapping based on HTML data-price attributes
-            const priceMapping = {
-                // Block Size
-                'Small R100': 100,
-                'Smedium R90': 90,
-                'Medium R80': 80,
-                'Large R70': 70,
-                'Jumbo R60': 60,
-                
-                // Length
-                'Shoulder R0': 0,
-                'Mid Back +R50': 50,
-                'Waist Length +R100': 100,
-                'Bum Length +R150': 150,
-                'Knee Length +R200': 200,
-                
-                // Style
-                'None R0': 0,
-                'Knotless +R60': 60,
-                'Twist +R40': 40,
-                'Locs +R200': 200,
-                'French Curls +R80': 80,
-                'Brazilian Twist +R70': 70,
-                
-                // Color
-                '1 Color R0': 0,
-                'Color Mix +R30': 30,
-                
-                // Hair Length
-                'Short +R50': 50,
-                'Normal R0': 0,
-                
-                // Curls
-                'None R0': 0,
-                'Bottom Curls Only +R30': 30,
-                'Boho/Goddess Curls Only +R50': 50,
-                'Both Bottom + Boho +R70': 70,
-                
-                // Curl Method
-                'Client Brings Curls R0': 0,
-                'I Curl the Hairpiece +R10': 10,
-                'I Use My Own Curls +R50': 50,
-                
-                // Client Status (discount only)
-                'First Time': 0,
-                'Returning 10% off': 10,
-                '5+ Styles Done 20% off': 20
-            };
-            
             // Get all selected options
             const formData = new FormData(bookingForm);
             const selectedOptions = {};
             
             for (let [name, value] of formData.entries()) {
                 if (name !== 'name' && name !== 'email' && name !== 'phone' && name !== 'date') {
-                    selectedOptions[name] = {
-                        displayText: value.split(' R')[0].split(' +R')[0],
-                        price: priceMapping[value] || 0
-                    };
+                    selectedOptions[name] = value;
                     
-                    totalPrice += selectedOptions[name].price;
+                    // Get price from option value
+                    totalPrice += getPriceFromOption(value);
                     
                     // Check for discount in client status
                     if (name === 'clientStatus') {
-                        discount = priceMapping[value] || 0;
+                        const discountMatch = value.match(/(\d+)% off/);
+                        if (discountMatch) {
+                            discount = parseInt(discountMatch[1]);
+                        }
                     }
                 }
             }
             
-            // Add selected options to summary with correct prices
-            for (let [name, option] of Object.entries(selectedOptions)) {
+            // Add selected options to summary
+            for (let [name, value] of Object.entries(selectedOptions)) {
                 const optionDiv = document.createElement('div');
                 const optionName = document.createElement('span');
                 const optionValue = document.createElement('span');
@@ -219,13 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const formattedName = name.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
                 
                 optionName.textContent = formattedName + ':';
-                
-                // Display the option with correct price
-                if (option.price > 0) {
-                    optionValue.textContent = `${option.displayText} (R${option.price})`;
-                } else {
-                    optionValue.textContent = option.displayText;
-                }
+                optionValue.textContent = value;
                 
                 optionDiv.appendChild(optionName);
                 optionDiv.appendChild(optionValue);
@@ -266,65 +219,18 @@ document.addEventListener('DOMContentLoaded', function() {
             let totalPrice = 0;
             let discount = 0;
             
-            const priceMapping = {
-                // Block Size
-                'Small R100': 100,
-                'Smedium R90': 90,
-                'Medium R80': 80,
-                'Large R70': 70,
-                'Jumbo R60': 60,
-                
-                // Length
-                'Shoulder R0': 0,
-                'Mid Back +R50': 50,
-                'Waist Length +R100': 100,
-                'Bum Length +R150': 150,
-                'Knee Length +R200': 200,
-                
-                // Style
-                'None R0': 0,
-                'Knotless +R60': 60,
-                'Twist +R40': 40,
-                'Locs +R200': 200,
-                'French Curls +R80': 80,
-                'Brazilian Twist +R70': 70,
-                
-                // Color
-                '1 Color R0': 0,
-                'Color Mix +R30': 30,
-                
-                // Hair Length
-                'Short +R50': 50,
-                'Normal R0': 0,
-                
-                // Curls
-                'None R0': 0,
-                'Bottom Curls Only +R30': 30,
-                'Boho/Goddess Curls Only +R50': 50,
-                'Both Bottom + Boho +R70': 70,
-                
-                // Curl Method
-                'Client Brings Curls R0': 0,
-                'I Curl the Hairpiece +R10': 10,
-                'I Use My Own Curls +R50': 50,
-                
-                // Client Status (discount only)
-                'First Time': 0,
-                'Returning 10% off': 10,
-                '5+ Styles Done 20% off': 20
-            };
-            
             for (let [name, value] of formData.entries()) {
                 selectedOptions[name] = value;
                 
-                // Calculate total price using our price mapping
-                if (priceMapping.hasOwnProperty(value)) {
-                    totalPrice += priceMapping[value];
-                }
+                // Calculate total price
+                totalPrice += getPriceFromOption(value);
                 
                 // Check for discount
                 if (name === 'clientStatus') {
-                    discount = priceMapping[value] || 0;
+                    const discountMatch = value.match(/(\d+)% off/);
+                    if (discountMatch) {
+                        discount = parseInt(discountMatch[1]);
+                    }
                 }
             }
             
@@ -355,13 +261,13 @@ document.addEventListener('DOMContentLoaded', function() {
             whatsappMessage += `📅 Date: ${bookingDetails.date}\n`;
             whatsappMessage += `📞 Phone: ${bookingDetails.phone}\n`;
             whatsappMessage += `📧 Email: ${bookingDetails.email}\n\n`;
-            whatsappMessage += `💇‍♀️ Block Size: ${bookingDetails.blockSize} (R${priceMapping[bookingDetails.blockSize] || 0})\n`;
-            whatsappMessage += `📏 Length: ${bookingDetails.length} (R${priceMapping[bookingDetails.length] || 0})\n`;
-            whatsappMessage += `💈 Style: ${bookingDetails.style} (R${priceMapping[bookingDetails.style] || 0})\n`;
-            whatsappMessage += `🎨 Color: ${bookingDetails.color} (R${priceMapping[bookingDetails.color] || 0})\n`;
-            whatsappMessage += `✂️ Hair Length: ${bookingDetails.hairLength} (R${priceMapping[bookingDetails.hairLength] || 0})\n`;
-            whatsappMessage += `🌀 Curls: ${bookingDetails.curls} (R${priceMapping[bookingDetails.curls] || 0})\n`;
-            whatsappMessage += `✨ Curl Method: ${bookingDetails.curlMethod} (R${priceMapping[bookingDetails.curlMethod] || 0})\n`;
+            whatsappMessage += `💇‍♀️ Block Size: ${bookingDetails.blockSize}\n`;
+            whatsappMessage += `📏 Length: ${bookingDetails.length}\n`;
+            whatsappMessage += `💈 Style: ${bookingDetails.style}\n`;
+            whatsappMessage += `🎨 Color: ${bookingDetails.color}\n`;
+            whatsappMessage += `✂️ Hair Length: ${bookingDetails.hairLength}\n`;
+            whatsappMessage += `🌀 Curls: ${bookingDetails.curls}\n`;
+            whatsappMessage += `✨ Curl Method: ${bookingDetails.curlMethod}\n`;
             whatsappMessage += `👤 Status: ${bookingDetails.clientStatus}\n\n`;
             whatsappMessage += `💰 Total: ${bookingDetails.totalPrice}`;
             
@@ -372,13 +278,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Open WhatsApp in new tab
             window.open(whatsappUrl, '_blank');
             
-            // Prepare email data
+            // Prepare email data (this would typically be sent via a server)
             const emailData = {
                 to: 'sachah456@gmail.com',
                 subject: `New Booking from ${bookingDetails.name}`,
-                body: whatsappMessage
+                body: whatsappMessage // Same as WhatsApp message
             };
             
+            // In a real implementation, you would send this to your server
             console.log('Email data:', emailData);
             
             // Show success message
@@ -396,6 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Floating spots animation
     const floatingSpots = document.querySelector('.floating-spots');
     if (floatingSpots) {
+        // Additional spots for more animation
         for (let i = 0; i < 5; i++) {
             const spot = document.createElement('div');
             const colors = ['pink', 'purple', 'black'];
@@ -418,5 +326,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
-
